@@ -1,13 +1,6 @@
-#Auther: mahmoud3x0
-#Reflected XSS Scanner
-#futured work: DOM Based & Stored XSS
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-
-reflected = []
-stored = []
-dom = []
 
 def get_all_forms(url):
     response = requests.get(url).content
@@ -60,7 +53,7 @@ def reflected_xss(url, payload):
         form_info = get_form_info(form)
         content = submit_form(form_info, url, payload).content.decode()
 
-        if "mahmoud3x0" in content:
+        if "<mahmoud3x0" in content:
             vulnerable = True
             reflected.append({"payload": payload, "url": url, "form_info": form_info})
 
@@ -74,7 +67,7 @@ def dom_xss(url, payload):
 
 def scan(url, payload):
 
-    payload = "<scriPt>alert('mahmoud3x0')</scriPT>"
+    payload = "<mahmoud3x0"
     ####################################################################################################################################
     # Payloads = open('generalPayloads.txt', 'r')                                                                                      #
     # if technology.lower() == "nodejs":                                                                                               #
